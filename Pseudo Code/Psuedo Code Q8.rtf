@@ -1,0 +1,226 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fswiss\fcharset0 Helvetica-Oblique;
+\f3\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red247\green0\blue7;\red255\green255\blue255;\red0\green0\blue0;
+\red247\green247\blue239;\red80\green93\blue147;\red246\green246\blue239;}
+{\*\expandedcolortbl;;\cssrgb\c98636\c0\c0;\cssrgb\c100000\c100000\c100000\c0;\cssrgb\c0\c0\c0;
+\cssrgb\c97349\c97347\c94873;\cssrgb\c38593\c44888\c64448;\cssrgb\c97255\c97255\c94902;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11200\viewh14660\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 [Step 1: Define the problem]\
+\
+1. Import a list of lists (weather_data)\
+2. Parse the list of lists\
+3. Generate a summary string based off of data\
+- N Day Overview (N = list length = how many days we\'92ve been provided)\
+- Lowest temp\
+- Highest temp\
+- Lowest avg  * write a function?\
+- Highest avg * write a function?\
+* Check formatting (each info on a new line, two space gap after overview)\
+4. Return this summary string back to the caller\
+\
+\
+[Step 2. What Tools do we need to work with?]\
+\
+Functions:\
+* convert_date(<\'97 iso_string)\
+* calculate_mean(<\'97 weather_data)\
+* find_max(<\'97weather_data)\
+* find_min(<\'97weather_data)\
+\
+We may need these also to help shape data:\
+* Data Structures: Lists\
+* Libraries: import weather_data\
+* Loops: For loop (because we know how much data we are dealing with)\
+* Control Structures: if-then-else\
+\
+[Step 3. Inputs, Outputs, Imports, Exports]\
+\
+Input:\
+N/A\
+\
+Outputs:\
+Yes, we are writing a summary of information to present to the user\
+\
+Imports:\
+weather_data - a \'93list of lists\'94 containing weather info\
+\
+Exports:\
+weather_summary - represents the summary of weather info given to us\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+[Step 4. Pseudo Code]\
+\
+FUNCTION NAME: generate_summary\
+IMPORTS: weather_data (list)\
+EXPORTS: weather_summary (String)\
+\
+DEPENDS ON:\
+- the imported library of data from weather_data\
+\
+CALLS:\
+\
+Format:\
+* name(<\'97 what we give; \'97> what we get back)\
+\
+* convert_f_to_c(<\'97 temp; --> converted_temp)\
+* format_temperature(<\'97 temp; \'97> formatted_temp)\
+* convert_date(<\'97 iso_string; \'97> weather_date)\
+* calculate_mean(<\'97 weather_data; \'97> weather_mean)\
+* find_max(<\'97weather_data; \'97> temp_max)\
+* find_min(<\'97weather_data; \'97> temp_min)\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 VARIABLES:
+\f0\b0 \
+\
+* number_of_days: the length of weather_data, as its length represents how many days worth of data it has\
+\
+* lowest_temp_date:\
+    -> represents the date associated with lowest_temp within a \'93list of lists\'94 in weather_data\
+   -> the lowest_temp_date for a date will be stored in weather_data[N][0]; where N = a day\
+* lowest_temp (TUPLE):\
+     -> represents the lowest temperature within a \'93list of lists\'94 in weather_data\
+     -> the lowest_temp for a day is stored in weather_data[N][1] ; where N = a day\
+* avg_lowest_temp: an average of all lowest temperatures for number_of_days\
+     -> will be calculated as the mean\
+\
+* highest_temp_date:\
+    -> represents the date associated with highest_temp within a \'93list of lists\'94 in weather_data\
+     -> the highest_temp_date for a day is stored in weather_data[N][0] ; where N = a day\
+* highest_temp:\
+     -> represents the highest temperature within a \'93list of lists\'94 in weather_data\
+     -> the highest_temp for a day is stored in weather_data[N][2] ; where N = a day\
+* avg_highest_temp: an average of all highest temperatures for number_of_days\
+     -> will be calculated as the mean\
+\
+\
+
+\f1\b ALGORITHM:
+\f0\b0 \
+\
+Our workflow is going to be the following for min/max temp:\
+  (1) Find the temperature and the date it occurred\
+  (2) Convert the temperature from Fahrenheit to Celsius\
+  (3) Format the temperature into \'93temp\'b0C\'94\
+  (4) Convert the date from into ISO format\
+\
+Out workflow is going to be the following for avg_min / avg_max temp:\
+  (1) Use a loop to build a list that only consists of min/max temps\
+  (2) Pass that list into the calculate_mean() function\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b\fs40 \cf0 THIS IS OUTDATED\
+
+\f0\b0\fs24 \
+number_of_days = len(weather_data)\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \ul \ulc0 COMMENT: lowest_temp(value, index)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \ulnone temperature = CALL find_min(<\'97weather_data)\
+lowest_temp = temperature[0]\
+lowest_temp = CALL convert_f_to_c(<\'97 lowest_temp)\
+lowest_temp = CALL format_temperature(<\'97lowest_temp)
+\f2\i \
+
+\f0\i0 lowest_temp_date = temperature[1]
+\f2\i \
+
+\f0\i0 lowest_temp_date = CALL convert_date(<\'97 lowest_temp_date)
+\f2\i \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\i0 \cf0 \ul \ulc0 COMMENT: highest_temp(value, index)\
+\ulnone temperature = CALL find_max(<\'97weather_data)\
+highest_temp = temperature[0]\
+highest_temp = convert_f_to_c(<\'97 highest_temp)\
+highest_temp = CALL format_temperature(<\'97highest_temp)
+\f2\i \
+
+\f0\i0 highest_temp_date = temperature[1]
+\f2\i \
+
+\f0\i0 highest_temp_date = CALL convert_date(<\'97 highest_temp_date)
+\f2\i \
+\
+
+\f0\i0 lowest_temp_list = EMPTY LIST\
+highest_temp_list = EMPTY LIST
+\f2\i \
+\
+
+\f0\i0 FOR day in weather_data DO\
+  lowest_temp_list.append(day[1])\
+  highest_temp_list.append(day[2])
+\f2\i \
+\
+
+\f0\i0 avg_lowest_temp = CALL calculate_mean(<\'97 lowest_temp_list)\
+avg_lowest_temp = CALL convert_f_to_c(<\'97 avg_lowest_temp)\
+avg_lowest_temp = CALL format_temperature(<\'97 avg_lowest_temp)\
+\
+avg_highest_temp = CALL calculate_mean(<\'97 highest_temp_list)\
+avg_highest_temp = CALL convert_f_to_c(<\'97 avg_highest_temp)\
+avg_highest_temp = CALL format_temperature(<\'97 avg_highest_temp)\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 NEED THIS\
+\
+
+\f0\b0 \cf2 \{number_of_days\}\cf0  Day Overview\
+  The lowest temperature will be \cf2 \{lowest_temp\}\cf0 , and will occur on \cf2 \{lowest_temp_date\}\cf0 .\
+  The highest temperature will be \cf2 \{highest_temp\}\cf0 , and will occur on \cf2 \{highest_temp_date\}\cf0 .\
+  The average low this week is \cf2 \{avg_lowest_temp\}\cf0 .\
+  The average high this week is \cf2 \{avg_highest_temp\}\cf0 .\
+\
+5 Day Overview\
+  The lowest temperature will be 9.4\'b0C, and will occur on Friday 02 July 2021.\
+  The highest temperature will be 20.0\'b0C, and will occur on Saturday 03 July 2021.\
+  The average low this week is 12.2\'b0C.\
+  The average high this week is 17.8\'b0C.\
+\
+\
+\
+TESTING\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb3 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf5 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \strokec6  with open("tests/expected_output/example_one_summary.txt", encoding="utf8") as txt_file:\cf5 \strokec5 \
+\cf6 \strokec6      expected_result = txt_file.read()\cf5 \strokec5 \
+\
+\cf6 \strokec6  example_one = [\cf5 \strokec5 \
+\cf6 \strokec6      ["2021-07-02T07:00:00+08:00", 49, 67],\cf5 \strokec5 \
+\cf6 \strokec6      ["2021-07-03T07:00:00+08:00", 57, 68],\cf5 \strokec5 \
+\cf6 \strokec6      ["2021-07-04T07:00:00+08:00", 56, 62],\cf5 \strokec5 \
+\cf6 \strokec6      ["2021-07-05T07:00:00+08:00", 55, 61],\cf5 \strokec5 \
+\cf6 \strokec6      ["2021-07-06T07:00:00+08:00", 53, 62]\cf5 \strokec5 \
+\cf6 \strokec6 ]\cf5 \strokec5 \
+\
+\cf6 \strokec6 test = generate_summary(example_one)\cf5 \strokec5 \
+\cf6 \strokec6 is_equal = (expected_result == test)\cf5 \strokec5 \
+\cf6 \strokec6 print(f"Are they equal? \{is_equal\}")\cf5 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7 \cb1 \strokec7 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+}
